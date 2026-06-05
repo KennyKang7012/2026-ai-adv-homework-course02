@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
       html += '<button onclick="Auth.logout()" class="font-ui" style="' + navLinkStyle + ' background:none; border:none; cursor:pointer;" onmouseover="this.style.color=\'#FF4FB6\'" onmouseout="this.style.color=\'rgba(255,255,255,.65)\'">登出</button>';
       authNav.innerHTML = html;
     } else {
-      authNav.innerHTML = '<a href="/login" class="btn-accent" style="font-size:11px; padding:9px 22px;">登入</a>';
+      authNav.innerHTML = '<a href="/login" class="font-ui" style="' + navLinkStyle + '" onmouseover="this.style.color=\'#FF4FB6\'" onmouseout="this.style.color=\'rgba(255,255,255,.65)\'">登入</a>';
     }
   }
 
