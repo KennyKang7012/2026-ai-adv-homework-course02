@@ -236,3 +236,15 @@ body {
     rgba(0,0,0,.2) 100%
   );
 }
+
+/* ─── Remove browser focus outlines on clickable non-button elements ─── */
+*:focus          { outline: none; }
+*:focus-visible  { outline: none; }
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #FF4FB6;
+  outline-offset: 2px;
+}
