@@ -228,12 +228,13 @@ body {
 }
 
 /* ─── Dark overlay gradient ─── */
+/* Hero overlay：對應設計稿 rotation:270 (right→left), opacity stops */
 .hero-overlay {
   background: linear-gradient(
-    105deg,
-    rgba(0,0,0,.82) 0%,
-    rgba(0,0,0,.45) 55%,
-    rgba(0,0,0,.2) 100%
+    270deg,
+    rgba(0,0,0,.40) 0%,
+    rgba(0,0,0,.00) 60%,
+    rgba(0,0,0,.67) 100%
   );
 }
 
