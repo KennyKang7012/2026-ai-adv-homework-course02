@@ -1,26 +1,21 @@
-<header class="sticky top-0 z-50 bg-white shadow-sm border-b border-rose-bg">
-  <div class="max-w-7xl mx-auto flex items-center justify-between px-4 h-16">
-    <a href="/" class="text-xl font-bold text-rose-primary" style="font-family: 'Noto Serif TC', serif;">
+<header id="site-header" class="sticky top-0 z-50" style="background:#1A1A1A; border-bottom:1px solid rgba(255,255,255,0.06);">
+  <div style="max-width:1440px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:72px; padding:0 48px;">
+
+    <a href="/" class="font-display" style="font-size:21px; font-weight:700; font-style:italic; color:#fff; text-decoration:none; letter-spacing:0.02em; flex-shrink:0;">
       花漾生活
     </a>
 
-    <nav class="flex items-center gap-6 text-sm text-text-secondary">
-      <a href="/" class="hover:text-rose-primary transition-colors">商品列表</a>
-      <a href="/cart" class="hover:text-rose-primary transition-colors relative">
-        購物車
-        <span
-          id="cart-badge"
-          class="absolute -top-2 -right-4 bg-rose-primary text-white text-xs rounded-full w-5 h-5 items-center justify-center"
-          style="display: none;"
-        ></span>
+    <nav style="display:flex; align-items:center; gap:40px;">
+      <a href="/"        class="font-ui" style="font-size:11px; color:rgba(255,255,255,.65); letter-spacing:0.18em; text-transform:uppercase; text-decoration:none; transition:color .2s;" onmouseover="this.style.color='#FF4FB6'" onmouseout="this.style.color='rgba(255,255,255,.65)'">首頁</a>
+      <a href="/#products" class="font-ui" style="font-size:11px; color:rgba(255,255,255,.65); letter-spacing:0.18em; text-transform:uppercase; text-decoration:none; transition:color .2s;" onmouseover="this.style.color='#FF4FB6'" onmouseout="this.style.color='rgba(255,255,255,.65)'">商品</a>
+      <a href="/cart" style="position:relative; text-decoration:none;">
+        <span class="font-ui" style="font-size:11px; color:rgba(255,255,255,.65); letter-spacing:0.18em; text-transform:uppercase; transition:color .2s;" onmouseover="this.style.color='#FF4FB6'" onmouseout="this.style.color='rgba(255,255,255,.65)'">購物車</span>
+        <span id="cart-badge"
+              style="display:none; position:absolute; top:-10px; right:-18px; background:#FF4FB6; color:#fff; font-family:var(--font-ui); font-size:9px; font-weight:700; border-radius:999px; min-width:16px; height:16px; align-items:center; justify-content:center; padding:0 4px;"></span>
       </a>
-      <a id="orders-link" href="/orders" class="hover:text-rose-primary transition-colors" style="display: none;">
-        我的訂單
-      </a>
+      <a id="orders-link" href="/orders" class="font-ui" style="font-size:11px; color:rgba(255,255,255,.65); letter-spacing:0.18em; text-transform:uppercase; text-decoration:none; display:none;" onmouseover="this.style.color='#FF4FB6'" onmouseout="this.style.color='rgba(255,255,255,.65)'">我的訂單</a>
     </nav>
 
-    <div id="auth-nav" class="flex items-center gap-4 text-sm">
-      <a href="/login" class="bg-rose-primary text-white px-4 py-1.5 rounded-full hover:bg-rose-dark transition-colors">登入</a>
-    </div>
+    <div id="auth-nav" style="display:flex; align-items:center; gap:24px; flex-shrink:0;"></div>
   </div>
 </header>

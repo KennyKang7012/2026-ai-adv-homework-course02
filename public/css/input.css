@@ -1,21 +1,238 @@
 @import "tailwindcss";
 
 @theme {
-  --color-rose-primary: #C4727F;
-  --color-rose-dark: #A85B67;
-  --color-rose-light: #E8A5AE;
-  --color-apricot: #D4956A;
-  --color-sage: #7EA584;
-  --color-cream: #FBF8F4;
-  --color-blush: #FFF1EC;
-  --color-rose-bg: #FDEAE4;
-  --color-text-primary: #2C2A28;
-  --color-text-secondary: #6B6560;
-  --color-text-muted: #9A948E;
+  --color-accent: #FF4FB6;
+  --color-accent-hover: #E03A9F;
+  --color-dark: #1A1A1A;
+  --color-darker: #0D0D0D;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #F9F9F9;
+  --color-border: #E5E7EB;
+  --color-success: #10B981;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #4B5563;
+  --color-text-muted: #9CA3AF;
+  /* backward compat */
+  --color-rose-primary: #FF4FB6;
+  --color-rose-dark: #E03A9F;
+  --color-rose-light: #FFB3DC;
+  --color-sage: #10B981;
+  --color-cream: #FFFFFF;
+  --color-blush: #FFF0F8;
+  --color-rose-bg: #FFF0F8;
+  --color-apricot: #FF4FB6;
+  /* Font stacks exposed as CSS vars for inline use */
+  --font-display: 'Playfair Display', 'Noto Serif TC', Georgia, serif;
+  --font-body: 'Newsreader', 'Noto Serif TC', Georgia, serif;
+  --font-ui: 'Funnel Sans', 'Noto Sans TC', system-ui, sans-serif;
 }
 
+*, *::before, *::after { box-sizing: border-box; }
+
 body {
-  font-family: 'Noto Sans TC', sans-serif;
-  background-color: var(--color-cream);
-  color: var(--color-text-primary);
+  font-family: var(--font-ui);
+  background: #FFFFFF;
+  color: #1A1A1A;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Font utilities ─── */
+.font-display { font-family: var(--font-display) !important; }
+.font-body    { font-family: var(--font-body)    !important; }
+.font-ui      { font-family: var(--font-ui)      !important; }
+
+/* ─── Eyebrow label ─── */
+.eyebrow {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #FF4FB6;
+}
+
+/* ─── Site-wide container ─── */
+.site-container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+/* ─── Buttons ─── */
+.btn-accent {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 13px 30px;
+  background: #FF4FB6; color: #fff;
+  font-family: var(--font-ui); font-size: 12px; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  border: none; border-radius: 4px; cursor: pointer; text-decoration: none;
+  transition: background .2s, transform .1s;
+  white-space: nowrap;
+}
+.btn-accent:hover  { background: #E03A9F; }
+.btn-accent:active { transform: scale(.98); }
+.btn-accent:disabled { opacity: .5; cursor: not-allowed; pointer-events: none; }
+
+.btn-dark {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 13px 30px;
+  background: #1A1A1A; color: #fff;
+  font-family: var(--font-ui); font-size: 12px; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  border: none; border-radius: 4px; cursor: pointer; text-decoration: none;
+  transition: background .2s, transform .1s;
+  white-space: nowrap;
+}
+.btn-dark:hover  { background: #0D0D0D; }
+.btn-dark:disabled { opacity: .5; cursor: not-allowed; pointer-events: none; }
+
+.btn-outline {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 29px;
+  background: transparent; color: #1A1A1A;
+  font-family: var(--font-ui); font-size: 12px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  border: 1px solid #1A1A1A; border-radius: 4px; cursor: pointer; text-decoration: none;
+  transition: background .2s, color .2s;
+  white-space: nowrap;
+}
+.btn-outline:hover { background: #1A1A1A; color: #fff; }
+
+.btn-outline-white {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 12px 29px;
+  background: transparent; color: #fff;
+  font-family: var(--font-ui); font-size: 12px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,.65); border-radius: 4px;
+  cursor: pointer; text-decoration: none;
+  transition: background .2s;
+}
+.btn-outline-white:hover { background: rgba(255,255,255,.12); }
+
+/* ─── Form elements ─── */
+.form-label {
+  display: block;
+  font-family: var(--font-ui); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #1A1A1A; margin-bottom: 6px;
+}
+
+.form-input {
+  width: 100%; height: 44px;
+  background: #F9F9F9; color: #1A1A1A;
+  font-family: var(--font-body); font-size: 14px;
+  padding: 0 14px;
+  border: 1px solid #E5E7EB; border-radius: 4px;
+  outline: none;
+  transition: border-color .2s, background .2s;
+}
+.form-input:focus { border-color: #1A1A1A; background: #fff; }
+.form-input::placeholder { color: #9CA3AF; }
+.form-input.is-error { border-color: #EF4444; }
+
+.form-textarea {
+  width: 100%;
+  background: #F9F9F9; color: #1A1A1A;
+  font-family: var(--font-body); font-size: 14px;
+  padding: 12px 14px;
+  border: 1px solid #E5E7EB; border-radius: 4px;
+  outline: none; resize: none;
+  transition: border-color .2s, background .2s;
+}
+.form-textarea:focus { border-color: #1A1A1A; background: #fff; }
+.form-textarea::placeholder { color: #9CA3AF; }
+
+.form-error {
+  font-family: var(--font-ui); font-size: 11px;
+  color: #EF4444; margin-top: 4px;
+}
+
+/* ─── Product card ─── */
+.product-card {
+  border: 1px solid #E5E7EB;
+  background: #fff;
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow .25s, transform .25s;
+}
+.product-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.09); transform: translateY(-2px); }
+.product-card .card-img { overflow: hidden; }
+.product-card .card-img img { transition: transform .5s ease; width:100%; height:100%; object-fit:cover; }
+.product-card:hover .card-img img { transform: scale(1.06); }
+
+/* ─── Quantity control ─── */
+.qty-ctrl { display: inline-flex; align-items: center; border: 1px solid #1A1A1A; }
+.qty-btn {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  background: #fff; color: #1A1A1A;
+  font-family: var(--font-ui); font-size: 17px;
+  cursor: pointer; border: none;
+  transition: background .15s;
+}
+.qty-btn:hover:not(:disabled) { background: #F9F9F9; }
+.qty-btn:disabled { opacity: .35; cursor: not-allowed; }
+.qty-val {
+  min-width: 44px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  background: #1A1A1A; color: #fff;
+  font-family: var(--font-ui); font-size: 13px;
+  border-left: 1px solid #1A1A1A; border-right: 1px solid #1A1A1A;
+  padding: 0 8px;
+}
+
+/* ─── Status badges ─── */
+.status-badge {
+  display: inline-flex; align-items: center;
+  padding: 3px 11px;
+  border: 1px solid; border-radius: 999px;
+  font-family: var(--font-ui); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+.status-pending   { color: #FF4FB6; border-color: #FF4FB6; }
+.status-shipped   { color: #10B981; border-color: #10B981; }
+.status-completed { color: #4B5563; border-color: #4B5563; }
+.status-cancelled { color: #EF4444; border-color: #EF4444; }
+
+/* ─── Loading spinner ─── */
+.spinner {
+  width: 32px; height: 32px;
+  border: 3px solid #E5E7EB;
+  border-top-color: #FF4FB6;
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── Page animations ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.anim-fade-up   { animation: fadeUp .55s ease forwards; }
+.anim-delay-1   { animation: fadeUp .55s .12s ease forwards; opacity: 0; }
+.anim-delay-2   { animation: fadeUp .55s .24s ease forwards; opacity: 0; }
+.anim-delay-3   { animation: fadeUp .55s .36s ease forwards; opacity: 0; }
+
+/* ─── Page header band (inner pages) ─── */
+.page-band {
+  padding: 40px 80px 28px;
+  border-bottom: 1px solid #E5E7EB;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* ─── Dark overlay gradient ─── */
+.hero-overlay {
+  background: linear-gradient(
+    105deg,
+    rgba(0,0,0,.82) 0%,
+    rgba(0,0,0,.45) 55%,
+    rgba(0,0,0,.2) 100%
+  );
 }

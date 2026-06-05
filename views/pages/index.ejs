@@ -1,189 +1,178 @@
 <div id="app">
-  <!-- Hero Banner -->
-  <section class="relative bg-gradient-to-r from-blush to-rose-bg rounded-3xl overflow-hidden mb-12 -mx-4 px-4">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center py-12 md:py-20 px-6 md:px-12 gap-8">
-      <div class="flex-1 text-center md:text-left">
-        <h1 class="text-3xl md:text-4xl font-bold text-text-primary mb-4" style="font-family: 'Noto Serif TC', serif;">
-          讓花裝點生活每一刻
+
+  <!-- ── Hero ─────────────────────────────────────────────── -->
+  <section style="position:relative; height:680px; overflow:hidden; background:#1A1A1A;">
+    <img src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=1440&q=80"
+         alt=""
+         style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.55;">
+    <div class="hero-overlay" style="position:absolute; inset:0;"></div>
+    <div style="position:relative; z-index:1; height:100%; display:flex; align-items:flex-start; padding-top:155px; padding-left:96px;">
+      <div style="max-width:660px;">
+        <span class="eyebrow anim-fade-up" style="margin-bottom:20px;">SINCE 2020 · TAIPEI</span>
+        <h1 class="font-display anim-delay-1"
+            style="font-size:clamp(64px,6vw,88px); font-weight:700; color:#fff; line-height:.92; margin-bottom:24px;">
+          讓花裝點<br>生活每一刻
         </h1>
-        <p class="text-text-secondary mb-6 leading-relaxed">
-          精選當季鮮花，由專業花藝師手工包裝。每一束花都傳遞著溫暖與祝福，為您的生活增添色彩與芬芳。
+        <p class="font-body anim-delay-2"
+           style="font-size:17px; color:rgba(255,255,255,.62); line-height:1.75; margin-bottom:36px; max-width:420px;">
+          精選當季鮮花，由專業花藝師手工包裝。<br>每一束花都傳遞著溫暖與祝福。
         </p>
-        <a href="#products" class="inline-block bg-rose-primary text-white px-8 py-3 rounded-full hover:bg-rose-dark transition-colors text-sm">
-          立即選購
-        </a>
-      </div>
-      <div class="flex-1 max-w-md">
-        <img
-          src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=600"
-          alt="花束"
-          class="w-full rounded-2xl shadow-lg"
-        />
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured Products -->
-  <section class="mb-12">
-    <div class="text-center mb-8">
-      <h2 class="text-2xl font-bold text-text-primary" style="font-family: 'Noto Serif TC', serif;">
-        &#127801; 精選推薦
-      </h2>
-      <p class="text-text-muted text-sm mt-2">本季最受歡迎的花卉精選</p>
-    </div>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <div
-        v-for="(product, idx) in products.slice(0, 4)"
-        :key="product.id"
-        class="bg-white rounded-2xl overflow-hidden shadow-sm cursor-pointer hover:shadow-md transition-shadow"
-        @click="goToProduct(product.id)"
-      >
-        <div class="aspect-square overflow-hidden">
-          <img
-            :src="product.image_url || featuredImages[idx % 4]"
-            :alt="product.name"
-            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-          />
-        </div>
-        <div class="p-3 text-center">
-          <h3 class="font-medium text-sm text-text-primary truncate">{{ product.name }}</h3>
-          <p class="text-rose-primary font-bold mt-1">NT$ {{ product.price.toLocaleString() }}</p>
+        <div class="anim-delay-3" style="display:flex; gap:16px; flex-wrap:wrap;">
+          <a href="#products" class="btn-accent">立即選購</a>
+          <a href="#story"    class="btn-outline-white">了解更多</a>
         </div>
       </div>
     </div>
+    <p class="font-ui"
+       style="position:absolute; bottom:28px; right:80px; font-size:10px; color:rgba(255,255,255,.35); letter-spacing:.25em; text-transform:uppercase;">
+      ↓ 探索商品
+    </p>
   </section>
 
-  <!-- Brand Story -->
-  <section class="mb-12 bg-white rounded-3xl overflow-hidden shadow-sm">
-    <div class="flex flex-col md:flex-row">
-      <div class="md:w-1/2">
-        <img
-          src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=600"
-          alt="花藝師"
-          class="w-full h-64 md:h-full object-cover"
-        />
+  <!-- ── Featured Products ─────────────────────────────────── -->
+  <section style="padding:80px 0; background:#fff;">
+    <div class="site-container">
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:48px;">
+        <div>
+          <span class="eyebrow" style="margin-bottom:12px;">CURATED FOR YOU</span>
+          <h2 class="font-display" style="font-size:38px; font-weight:700; color:#1A1A1A; line-height:1;">精選推薦</h2>
+        </div>
+        <a href="#products" class="btn-outline" style="font-size:11px; padding:10px 24px;">查看全部</a>
       </div>
-      <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
-        <h2 class="text-2xl font-bold text-text-primary mb-4" style="font-family: 'Noto Serif TC', serif;">
-          專心，做好一束花的感動
-        </h2>
-        <p class="text-text-secondary leading-relaxed mb-4">
-          花漾生活成立於 2020 年，我們相信每一朵花都有自己的故事。透過專業花藝師的巧手，將大自然的美好帶進您的日常生活中。
-        </p>
-        <p class="text-text-muted text-sm italic">
-          「每一束花，都是一份用心的禮物。」
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- All Products Grid -->
-  <section id="products" class="mb-12">
-    <div class="text-center mb-8">
-      <h2 class="text-2xl font-bold text-text-primary" style="font-family: 'Noto Serif TC', serif;">
-        探索所有花藝
-      </h2>
-      <p class="text-text-muted text-sm mt-2">找到屬於您的那束花</p>
-    </div>
-
-    <div v-if="loading" class="flex justify-center py-12">
-      <div class="w-8 h-8 border-4 border-rose-primary border-t-transparent rounded-full animate-spin"></div>
-    </div>
-
-    <template v-else>
-      <div v-if="products.length === 0" class="text-center py-12">
-        <div class="text-4xl mb-3">&#127804;</div>
-        <p class="text-text-secondary">目前沒有商品</p>
-        <p class="text-text-muted text-sm">請稍後再來看看</p>
-      </div>
-
-      <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div
-          v-for="product in products"
-          :key="product.id"
-          @click="goToProduct(product.id)"
-          class="bg-white rounded-2xl shadow-sm overflow-hidden cursor-pointer hover:shadow-md transition-shadow group"
-        >
-          <div class="aspect-square overflow-hidden">
-            <img
-              :src="product.image_url || 'https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=400'"
-              :alt="product.name"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            />
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:24px;">
+        <div v-for="(product, idx) in products.slice(0, 4)" :key="product.id"
+             class="product-card" @click="goToProduct(product.id)">
+          <div class="card-img" style="aspect-ratio:1;">
+            <img :src="product.image_url || featuredImages[idx % 4]" :alt="product.name">
           </div>
-          <div class="p-4">
-            <h3 class="font-medium text-text-primary mb-1 truncate">{{ product.name }}</h3>
-            <p class="text-rose-primary font-bold text-lg mb-3">NT$ {{ product.price.toLocaleString() }}</p>
-            <button
-              @click.stop="addToCart(product)"
-              :disabled="product._adding || product.stock <= 0"
-              class="w-full bg-rose-primary text-white py-2 rounded-full text-sm hover:bg-rose-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {{ product.stock <= 0 ? '已售完' : '加入購物車' }}
-            </button>
+          <div style="padding:16px;">
+            <h3 class="font-display" style="font-size:14px; font-weight:700; color:#1A1A1A; margin-bottom:8px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+              {{ product.name }}
+            </h3>
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+              <p class="font-body" style="font-size:13px; font-style:italic; color:#FF4FB6;">NT$ {{ product.price.toLocaleString() }}</p>
+              <button @click.stop="addToCart(product)"
+                      :disabled="product._adding || product.stock <= 0"
+                      class="btn-dark" style="font-size:10px; padding:7px 14px;">
+                {{ product.stock <= 0 ? '售完' : '加入' }}
+              </button>
+            </div>
           </div>
         </div>
       </div>
-
-      <!-- Pagination -->
-      <div v-if="pagination.totalPages > 1" class="flex justify-center gap-2 mt-8">
-        <button
-          v-for="p in pagination.totalPages"
-          :key="p"
-          @click="loadProducts(p)"
-          class="w-10 h-10 rounded-full text-sm transition-colors"
-          :class="p === pagination.page ? 'bg-rose-primary text-white' : 'bg-white text-text-secondary hover:bg-rose-bg'"
-        >
-          {{ p }}
-        </button>
-      </div>
-    </template>
+    </div>
   </section>
 
-  <!-- Customer Testimonials -->
-  <section class="mb-12">
-    <div class="text-center mb-8">
-      <h2 class="text-2xl font-bold text-text-primary" style="font-family: 'Noto Serif TC', serif;">
-        顧客花束好評分享
+  <!-- ── Brand Story ────────────────────────────────────────── -->
+  <section id="story" style="display:flex; height:560px; overflow:hidden;">
+    <div style="width:45%; overflow:hidden; flex-shrink:0;">
+      <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=800&q=80"
+           alt="花藝師" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+    <div style="flex:1; background:#1A1A1A; display:flex; flex-direction:column; justify-content:center; padding:64px 80px;">
+      <span class="eyebrow" style="margin-bottom:16px;">OUR STORY</span>
+      <h2 class="font-display" style="font-size:40px; font-weight:700; color:#fff; line-height:1.12; margin-bottom:24px;">
+        專心，做好<br>一束花的感動
       </h2>
+      <p class="font-body" style="font-size:14px; color:rgba(255,255,255,.52); line-height:1.85; margin-bottom:20px; max-width:380px;">
+        花漾生活成立於 2020 年，我們相信每一朵花都有自己的故事。透過專業花藝師的巧手，將大自然的美好帶進您的日常生活中。
+      </p>
+      <p class="font-body" style="font-size:13px; font-style:italic; color:#FF4FB6;">「每一束花，都是一份用心的禮物。」</p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="bg-white rounded-2xl p-6 shadow-sm">
-        <div class="text-apricot mb-2">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="text-text-secondary text-sm mb-4">「花束非常漂亮，包裝精緻，送給媽媽她超開心的！配送也很準時。」</p>
-        <p class="text-text-muted text-xs">-- 小美</p>
-      </div>
-      <div class="bg-white rounded-2xl p-6 shadow-sm">
-        <div class="text-apricot mb-2">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="text-text-secondary text-sm mb-4">「第二次購買了，品質一如既往的好。花材新鮮，整體搭配很有美感。」</p>
-        <p class="text-text-muted text-xs">-- 阿明</p>
-      </div>
-      <div class="bg-white rounded-2xl p-6 shadow-sm">
-        <div class="text-apricot mb-2">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="text-text-secondary text-sm mb-4">「女朋友收到花束超感動！會再回購的，推薦給大家！」</p>
-        <p class="text-text-muted text-xs">-- 大衛</p>
+  </section>
+
+  <!-- ── Services Bar ───────────────────────────────────────── -->
+  <section style="background:#F9F9F9; border-top:1px solid #E5E7EB; border-bottom:1px solid #E5E7EB;">
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); height:120px;">
+      <div v-for="(svc, i) in [{icon:'🚚',t:'快速配送',d:'台北市區當日配送'},{icon:'🎁',t:'精美包裝',d:'每束花都經過精心包裝'},{icon:'💌',t:'滿額免運',d:'消費滿 NT$ 500 免運費'}]"
+           :key="svc.t"
+           style="display:flex; align-items:center; justify-content:center; gap:20px;"
+           :style="i < 2 ? 'border-right:1px solid #E5E7EB' : ''">
+        <span style="font-size:26px;">{{ svc.icon }}</span>
+        <div>
+          <p class="font-ui" style="font-size:12px; font-weight:700; color:#1A1A1A; letter-spacing:.06em; margin-bottom:3px;">{{ svc.t }}</p>
+          <p class="font-body" style="font-size:12px; color:#4B5563;">{{ svc.d }}</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Service Features -->
-  <section class="mb-8">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-      <div class="bg-white rounded-2xl p-6 shadow-sm">
-        <div class="text-3xl mb-3">&#128666;</div>
-        <h3 class="font-medium text-text-primary mb-1">快速配送</h3>
-        <p class="text-text-muted text-sm">台北市區當日配送</p>
+  <!-- ── All Products ──────────────────────────────────────── -->
+  <section id="products" style="padding:80px 0; background:#fff;">
+    <div class="site-container">
+      <div style="text-align:center; margin-bottom:48px;">
+        <span class="eyebrow" style="margin-bottom:12px;">FULL COLLECTION</span>
+        <h2 class="font-display" style="font-size:38px; font-weight:700; color:#1A1A1A; margin-bottom:8px;">探索所有花藝</h2>
+        <p class="font-body" style="font-size:14px; color:#9CA3AF;">找到屬於您的那束花</p>
       </div>
-      <div class="bg-white rounded-2xl p-6 shadow-sm">
-        <div class="text-3xl mb-3">&#127873;</div>
-        <h3 class="font-medium text-text-primary mb-1">精美包裝</h3>
-        <p class="text-text-muted text-sm">每束花都經過精心包裝</p>
+
+      <div v-if="loading" style="display:flex; justify-content:center; padding:64px 0;">
+        <div class="spinner"></div>
       </div>
-      <div class="bg-white rounded-2xl p-6 shadow-sm">
-        <div class="text-3xl mb-3">&#128155;</div>
-        <h3 class="font-medium text-text-primary mb-1">滿額免運</h3>
-        <p class="text-text-muted text-sm">消費滿 NT$ 500 免運費</p>
+
+      <template v-else>
+        <div v-if="products.length === 0" style="text-align:center; padding:64px 0;">
+          <p style="font-size:40px; margin-bottom:12px;">🌼</p>
+          <p class="font-body" style="color:#4B5563;">目前沒有商品</p>
+          <p class="font-ui" style="font-size:12px; color:#9CA3AF; margin-top:4px;">請稍後再來看看</p>
+        </div>
+
+        <div v-else style="display:grid; grid-template-columns:repeat(3,1fr); gap:28px;">
+          <div v-for="product in products" :key="product.id"
+               class="product-card" @click="goToProduct(product.id)">
+            <div class="card-img" style="aspect-ratio:1;">
+              <img :src="product.image_url || 'https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=400'"
+                   :alt="product.name">
+            </div>
+            <div style="padding:20px; display:flex; align-items:center; justify-content:space-between; gap:12px;">
+              <div style="min-width:0;">
+                <h3 class="font-display" style="font-size:15px; font-weight:700; color:#1A1A1A; margin-bottom:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ product.name }}</h3>
+                <p class="font-body" style="font-size:14px; font-style:italic; color:#FF4FB6;">NT$ {{ product.price.toLocaleString() }}</p>
+              </div>
+              <button @click.stop="addToCart(product)"
+                      :disabled="product._adding || product.stock <= 0"
+                      class="btn-dark" style="font-size:11px; padding:10px 18px; flex-shrink:0;">
+                {{ product.stock <= 0 ? '已售完' : '加入購物車' }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="pagination.totalPages > 1" style="display:flex; justify-content:center; gap:8px; margin-top:48px;">
+          <button v-for="p in pagination.totalPages" :key="p" @click="loadProducts(p)"
+                  class="font-ui"
+                  style="width:36px; height:36px; font-size:12px; border:1px solid; border-radius:0; cursor:pointer; transition:all .2s;"
+                  :style="p === pagination.page
+                    ? 'background:#1A1A1A; color:#fff; border-color:#1A1A1A;'
+                    : 'background:#fff; color:#4B5563; border-color:#E5E7EB;'"
+                  @mouseover="p !== pagination.page && ($event.target.style.borderColor='#1A1A1A')"
+                  @mouseout="p !== pagination.page && ($event.target.style.borderColor='#E5E7EB')">
+            {{ p }}
+          </button>
+        </div>
+      </template>
+    </div>
+  </section>
+
+  <!-- ── Testimonials ──────────────────────────────────────── -->
+  <section style="padding:80px 0; background:#F9F9F9;">
+    <div class="site-container">
+      <div style="text-align:center; margin-bottom:48px;">
+        <span class="eyebrow" style="margin-bottom:12px;">CUSTOMER VOICES</span>
+        <h2 class="font-display" style="font-size:38px; font-weight:700; color:#1A1A1A;">顧客花束好評分享</h2>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:32px;">
+        <div v-for="r in [{text:'「花束非常漂亮，包裝精緻，送給媽媽她超開心的！配送也很準時。」',author:'小美'},{text:'「第二次購買了，品質一如既往的好。花材新鮮，整體搭配很有美感。」',author:'阿明'},{text:'「女朋友收到花束超感動！會再回購的，推薦給大家！」',author:'大衛'}]"
+             :key="r.author"
+             style="background:#fff; border:1px solid #E5E7EB; padding:32px;">
+          <div style="display:flex; gap:3px; margin-bottom:16px;">
+            <span v-for="s in 5" :key="s" style="color:#FF4FB6; font-size:14px;">★</span>
+          </div>
+          <p class="font-body" style="font-size:14px; color:#4B5563; line-height:1.85; margin-bottom:20px;">{{ r.text }}</p>
+          <p class="font-ui" style="font-size:11px; color:#9CA3AF; letter-spacing:.18em; text-transform:uppercase;">— {{ r.author }}</p>
+        </div>
       </div>
     </div>
   </section>
+
 </div>

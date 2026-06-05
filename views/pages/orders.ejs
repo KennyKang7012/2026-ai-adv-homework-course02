@@ -1,40 +1,88 @@
 <div id="app">
-  <h1 class="text-2xl font-bold text-text-primary mb-6" style="font-family: 'Noto Serif TC', serif;">我的訂單</h1>
 
-  <div v-if="loading" class="flex justify-center py-12">
-    <div class="w-8 h-8 border-4 border-rose-primary border-t-transparent rounded-full animate-spin"></div>
+  <!-- Page header -->
+  <div style="border-bottom:1px solid #E5E7EB; padding:40px 80px 28px;">
+    <span class="eyebrow" style="margin-bottom:12px;">ACCOUNT</span>
+    <h1 class="font-display" style="font-size:44px; font-weight:700; color:#1A1A1A; line-height:1;">我的訂單</h1>
   </div>
 
-  <div v-else-if="orders.length === 0" class="text-center py-12">
-    <div class="text-4xl mb-3">&#128230;</div>
-    <p class="text-text-secondary mb-1">尚無訂單</p>
-    <p class="text-text-muted text-sm mb-4">快去選購喜歡的花束吧！</p>
-    <a href="/" class="inline-block bg-rose-primary text-white px-6 py-2 rounded-full text-sm hover:bg-rose-dark transition-colors">去逛逛</a>
-  </div>
+  <div style="display:flex; min-height:calc(100vh - 280px);">
 
-  <div v-else class="space-y-4">
-    <a
-      v-for="order in orders"
-      :key="order.id"
-      :href="'/orders/' + order.id"
-      class="block bg-white rounded-2xl shadow-sm p-5 hover:shadow-md transition-shadow"
-    >
-      <div class="flex items-center justify-between">
-        <div>
-          <p class="text-sm text-text-secondary">訂單編號：{{ order.order_no }}</p>
-          <p class="text-xs text-text-muted mt-1">{{ new Date(order.created_at).toLocaleDateString('zh-TW') }}</p>
-        </div>
-        <div class="flex items-center gap-3">
-          <span class="font-bold text-text-primary">NT$ {{ order.total_amount.toLocaleString() }}</span>
-          <span
-            class="text-xs px-3 py-1 rounded-full font-medium"
-            :class="statusMap[order.status]?.cls || 'bg-gray-100 text-gray-600'"
-          >
-            {{ statusMap[order.status]?.label || order.status }}
-          </span>
-          <span class="text-text-muted">&#8594;</span>
-        </div>
+    <!-- Sidebar -->
+    <div style="width:240px; flex-shrink:0; background:#F9F9F9; border-right:1px solid #E5E7EB; padding:32px 0;">
+      <a href="/orders"
+         style="display:flex; align-items:center; gap:12px; padding:13px 24px; text-decoration:none; border-left:3px solid #FF4FB6; background:#fff;"
+         class="font-ui">
+        <span style="font-size:12px; font-weight:700; color:#FF4FB6; letter-spacing:.1em; text-transform:uppercase;">我的訂單</span>
+      </a>
+      <a href="/"
+         style="display:flex; align-items:center; gap:12px; padding:13px 24px; text-decoration:none; border-left:3px solid transparent;"
+         class="font-ui" onmouseover="this.style.background='#fff'" onmouseout="this.style.background='transparent'">
+        <span style="font-size:12px; color:#4B5563; letter-spacing:.1em; text-transform:uppercase;">繼續購物</span>
+      </a>
+      <div style="height:1px; background:#E5E7EB; margin:16px 24px;"></div>
+      <button onclick="Auth.logout()"
+              class="font-ui"
+              style="width:100%; text-align:left; padding:13px 24px; background:none; border:none; cursor:pointer; font-size:12px; color:#9CA3AF; letter-spacing:.1em; text-transform:uppercase;"
+              onmouseover="this.style.color='#EF4444'" onmouseout="this.style.color='#9CA3AF'">
+        登出
+      </button>
+    </div>
+
+    <!-- Main content -->
+    <div style="flex:1; padding:32px 64px;">
+
+      <div v-if="loading" style="display:flex; justify-content:center; padding:60px 0;">
+        <div class="spinner"></div>
       </div>
-    </a>
+
+      <div v-else-if="orders.length === 0" style="text-align:center; padding:80px 0;">
+        <p style="font-size:44px; margin-bottom:16px;">📦</p>
+        <p class="font-body" style="font-size:15px; color:#4B5563; margin-bottom:6px;">尚無訂單</p>
+        <p class="font-ui" style="font-size:12px; color:#9CA3AF; margin-bottom:28px;">快去選購喜歡的花束吧！</p>
+        <a href="/" class="btn-accent">去逛逛</a>
+      </div>
+
+      <div v-else>
+        <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:16px; border-bottom:1px solid #E5E7EB; margin-bottom:4px;">
+          <h2 class="font-display" style="font-size:22px; font-weight:700; color:#1A1A1A;">訂單記錄</h2>
+          <span class="font-body" style="font-size:13px; color:#9CA3AF; font-style:italic;">共 {{ orders.length }} 筆訂單</span>
+        </div>
+
+        <a v-for="order in orders" :key="order.id"
+           :href="'/orders/' + order.id"
+           style="display:flex; align-items:center; justify-content:space-between; padding:20px 0; border-bottom:1px solid #E5E7EB; text-decoration:none; transition:background .15s;"
+           onmouseover="this.style.background='#FAFAFA'; this.style.marginLeft='-16px'; this.style.paddingLeft='16px'; this.style.marginRight='-16px'; this.style.paddingRight='16px';"
+           onmouseout="this.style.background='transparent'; this.style.marginLeft='0'; this.style.paddingLeft='0'; this.style.marginRight='0'; this.style.paddingRight='0';">
+
+          <div>
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:6px;">
+              <span class="font-ui" style="font-size:13px; font-weight:700; color:#1A1A1A; letter-spacing:.06em;">{{ order.order_no }}</span>
+              <span class="status-badge"
+                    :class="{
+                      'status-pending':   order.status === 'pending',
+                      'status-shipped':   order.status === 'shipped',
+                      'status-completed': order.status === 'completed',
+                      'status-cancelled': order.status === 'cancelled'
+                    }">
+                {{ statusMap[order.status]?.label || order.status }}
+              </span>
+            </div>
+            <p class="font-body" style="font-size:12px; color:#9CA3AF; margin-bottom:4px;">
+              {{ new Date(order.created_at).toLocaleDateString('zh-TW') }}
+            </p>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:24px;">
+            <span class="font-display" style="font-size:18px; font-weight:700; color:#1A1A1A;">
+              NT$ {{ order.total_amount.toLocaleString() }}
+            </span>
+            <div class="btn-outline" style="font-size:11px; padding:8px 18px;">查看</div>
+          </div>
+        </a>
+      </div>
+
+    </div>
   </div>
+
 </div>

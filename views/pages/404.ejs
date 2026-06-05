@@ -1,8 +1,43 @@
-<div class="min-h-[60vh] flex items-center justify-center">
-  <div class="text-center">
-    <div class="text-6xl mb-4">&#127804;</div>
-    <h1 class="text-2xl font-bold text-text-primary mb-2" style="font-family: 'Noto Serif TC', serif;">找不到頁面</h1>
-    <p class="text-text-secondary mb-6">您造訪的頁面不存在</p>
-    <a href="/" class="inline-block bg-rose-primary text-white px-6 py-2 rounded-full text-sm hover:bg-rose-dark transition-colors">回到首頁</a>
+<div style="position:relative; min-height:calc(100vh - 72px); background:#0D0D0D; overflow:hidden; display:flex; align-items:flex-start; padding-top:180px; padding-left:96px;">
+
+  <!-- Background image -->
+  <img src="https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=1440&q=80"
+       alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.2;">
+  <div style="position:absolute; inset:0; background:linear-gradient(105deg, rgba(0,0,0,.95) 0%, rgba(0,0,0,.7) 55%, rgba(0,0,0,.4) 100%);"></div>
+
+  <!-- Decorative background 404 -->
+  <p class="font-display"
+     style="position:absolute; right:-40px; top:50%; transform:translateY(-50%); font-size:360px; font-weight:700; color:rgba(255,255,255,.03); line-height:1; pointer-events:none; user-select:none;">
+    404
+  </p>
+
+  <!-- Content -->
+  <div style="position:relative; z-index:1; max-width:600px;">
+    <span class="eyebrow anim-fade-up" style="margin-bottom:20px;">PAGE NOT FOUND</span>
+    <h1 class="font-display anim-delay-1"
+        style="font-size:clamp(72px,10vw,140px); font-weight:700; color:#fff; line-height:.9; margin-bottom:24px;">
+      404
+    </h1>
+    <h2 class="font-display anim-delay-1"
+        style="font-size:40px; font-weight:700; color:#fff; margin-bottom:20px; line-height:1.1;">
+      找不到頁面
+    </h2>
+    <p class="font-body anim-delay-2"
+       style="font-size:16px; color:rgba(255,255,255,.5); line-height:1.8; margin-bottom:40px; max-width:480px;">
+      您造訪的頁面不存在，或已被移除。<br>
+      請確認網址是否正確，或返回首頁繼續探索。
+    </p>
+    <div class="anim-delay-3" style="display:flex; gap:16px; flex-wrap:wrap;">
+      <a href="/" class="btn-accent">回到首頁</a>
+      <a href="/#products" class="btn-outline-white">瀏覽商品</a>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:12px; margin-top:60px;">
+      <div style="width:40px; height:1px; background:#FF4FB6;"></div>
+      <p class="font-body" style="font-size:13px; color:rgba(255,255,255,.3); font-style:italic;">
+        花漾生活 — 每一束花，都值得被找到
+      </p>
+    </div>
   </div>
+
 </div>
