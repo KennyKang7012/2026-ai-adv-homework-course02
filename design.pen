@@ -5175,8 +5175,9 @@
           },
           "fill": {
             "type": "image",
+            "opacity": 0.45,
             "enabled": true,
-            "url": "https://images.unsplash.com/photo-1598559213718-da4a925fbf71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODA2ODgxMDR8&ixlib=rb-4.1.0&q=80&w=1080",
+            "url": "https://images.unsplash.com/photo-1598559213718-da4a925fbf71?w=1440&q=80",
             "mode": "fill"
           },
           "width": 1440,
@@ -5192,17 +5193,21 @@
             "type": "gradient",
             "gradientType": "linear",
             "enabled": true,
-            "rotation": 0,
+            "rotation": 110,
             "size": {
               "height": 1
             },
             "colors": [
               {
-                "color": "#000000CC",
+                "color": "#000000E0",
                 "position": 0
               },
               {
-                "color": "#00000044",
+                "color": "#000000A6",
+                "position": 0.55
+              },
+              {
+                "color": "#00000059",
                 "position": 1
               }
             ]
@@ -5255,7 +5260,7 @@
           "id": "xKRjT",
           "layoutPosition": "absolute",
           "x": 500,
-          "y": 140,
+          "y": 80,
           "name": "Login Card",
           "clip": true,
           "width": 440,
@@ -5891,6 +5896,7 @@
                       "content": "帳戶設定",
                       "fontFamily": "Funnel Sans",
                       "fontSize": 13,
+                      "fontWeight": "normal",
                       "letterSpacing": 1
                     }
                   ]
@@ -5920,6 +5926,7 @@
                       "content": "收件地址",
                       "fontFamily": "Funnel Sans",
                       "fontSize": 13,
+                      "fontWeight": "normal",
                       "letterSpacing": 1
                     }
                   ]
@@ -5949,6 +5956,7 @@
                       "content": "登出",
                       "fontFamily": "Funnel Sans",
                       "fontSize": 13,
+                      "fontWeight": "normal",
                       "letterSpacing": 1
                     }
                   ]
