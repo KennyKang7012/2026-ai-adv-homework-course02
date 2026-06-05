@@ -1,29 +1,39 @@
-<div id="app" style="min-height:calc(100vh - 72px); position:relative; overflow:hidden; background:#1A1A1A;">
+<div id="app" style="min-height:calc(100vh - 72px); position:relative; overflow:hidden; background:#0D0D0D;">
 
-  <!-- Background image -->
-  <img src="https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=1440&q=80"
-       alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.3;">
-  <div style="position:absolute; inset:0; background:linear-gradient(105deg, rgba(0,0,0,.9) 0%, rgba(0,0,0,.6) 60%, rgba(0,0,0,.3) 100%);"></div>
+  <!-- 背景：暗色花卉圖（與 Pencil 設計稿同一張） -->
+  <img src="https://images.unsplash.com/photo-1598559213718-da4a925fbf71?w=1440&q=80"
+       alt=""
+       style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.45;">
 
-  <!-- Content -->
-  <div style="position:relative; z-index:1; display:flex; align-items:flex-start; justify-content:space-between; min-height:inherit; padding:60px 80px;">
+  <!-- 深色遮罩 -->
+  <div style="position:absolute; inset:0; background:linear-gradient(110deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.65) 55%, rgba(0,0,0,.35) 100%);"></div>
 
-    <!-- Login card -->
-    <div style="width:420px; background:#fff; border-radius:4px; overflow:hidden; flex-shrink:0;">
+  <!-- 頁面內容層 -->
+  <div style="position:relative; z-index:1; min-height:calc(100vh - 72px);">
 
-      <!-- Card header -->
+    <!-- 小型 nav overlay（設計稿有品牌名與返回連結） -->
+    <div style="position:absolute; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:center; padding:20px 48px;">
+      <span class="font-display" style="font-size:18px; font-weight:700; font-style:italic; color:#fff;">花漾生活</span>
+      <a href="/" class="font-ui" style="font-size:11px; color:rgba(255,255,255,.6); letter-spacing:.15em; text-decoration:none;"
+         onmouseover="this.style.color='#FF4FB6'" onmouseout="this.style.color='rgba(255,255,255,.6)'">← 回到首頁</a>
+    </div>
+
+    <!-- 登入卡片：水平置中，垂直偏上 -->
+    <div style="position:absolute; left:50%; top:80px; transform:translateX(-50%); width:440px; background:#fff; border-radius:4px; overflow:hidden; box-shadow:0 24px 64px rgba(0,0,0,.5);">
+
+      <!-- 卡片 header -->
       <div style="padding:36px 36px 24px; text-align:center; border-bottom:1px solid #E5E7EB;">
         <h1 class="font-display" style="font-size:28px; font-weight:700; font-style:italic; color:#1A1A1A; margin-bottom:8px;">花漾生活</h1>
         <p class="font-body" style="font-size:13px; color:#4B5563;">歡迎回來，請登入您的帳戶</p>
       </div>
 
-      <!-- Tabs -->
+      <!-- Tab 切換 -->
       <div style="display:flex; height:46px;">
         <button @click="activeTab = 'login'; errors = {}"
                 class="font-ui"
-                style="flex:1; font-size:12px; letter-spacing:.12em; text-transform:uppercase; border:none; cursor:pointer; transition:all .2s; border-bottom:2px solid transparent;"
+                style="flex:1; font-size:12px; letter-spacing:.12em; text-transform:uppercase; border:none; cursor:pointer; transition:all .2s;"
                 :style="activeTab === 'login'
-                  ? 'background:#FF4FB6; color:#fff; border-bottom-color:#FF4FB6;'
+                  ? 'background:#FF4FB6; color:#fff;'
                   : 'background:#F9F9F9; color:#9CA3AF;'">
           登入
         </button>
@@ -37,7 +47,7 @@
         </button>
       </div>
 
-      <!-- Login form -->
+      <!-- 登入表單 -->
       <form v-if="activeTab === 'login'" @submit.prevent="handleLogin" style="padding:28px 36px 36px;">
         <div style="display:flex; flex-direction:column; gap:18px;">
           <div>
@@ -74,7 +84,7 @@
         </button>
       </form>
 
-      <!-- Register form -->
+      <!-- 註冊表單 -->
       <form v-else @submit.prevent="handleRegister" style="padding:28px 36px 36px;">
         <div style="display:flex; flex-direction:column; gap:18px;">
           <div>
@@ -103,9 +113,9 @@
       </form>
     </div>
 
-    <!-- Right quote (decorative) -->
-    <div style="padding-top:80px; max-width:340px;">
-      <p class="font-display" style="font-size:34px; font-weight:700; color:#fff; line-height:1.28; margin-bottom:16px;">
+    <!-- 右側引言（絕對定位在右側，與設計稿一致） -->
+    <div style="position:absolute; right:10%; top:50%; transform:translateY(-50%); max-width:360px;">
+      <p class="font-display" style="font-size:36px; font-weight:700; color:#fff; line-height:1.28; margin-bottom:16px;">
         「每一朵花，<br>都在等待<br>屬於它的故事。」
       </p>
       <p class="font-body" style="font-size:14px; color:rgba(255,255,255,.45); font-style:italic;">— 花漾生活</p>
