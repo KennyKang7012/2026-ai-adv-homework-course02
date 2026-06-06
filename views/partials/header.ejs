@@ -18,5 +18,47 @@
     </nav>
 
     <div id="auth-nav" style="display:flex; align-items:center; gap:24px; flex-shrink:0;"></div>
+
+    <!-- 手機漢堡按鈕 -->
+    <button id="mobile-menu-btn" aria-label="開啟選單" onclick="document.getElementById('mobile-nav').classList.toggle('open')">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="2" y1="5"  x2="20" y2="5"/>
+        <line x1="2" y1="11" x2="20" y2="11"/>
+        <line x1="2" y1="17" x2="20" y2="17"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- 手機展開選單 -->
+  <div id="mobile-nav">
+    <a href="/">首頁</a>
+    <a href="/#products">商品</a>
+    <a href="/#story">關於我們</a>
+    <a href="/cart">購物車</a>
+    <a id="mobile-orders-link" href="/orders" style="display:none;">我的訂單</a>
+    <a id="mobile-account-link" href="/account" style="display:none;">帳戶設定</a>
+    <div id="mobile-auth-nav"></div>
   </div>
 </header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const mobileOrdersLink  = document.getElementById('mobile-orders-link');
+  const mobileAccountLink = document.getElementById('mobile-account-link');
+  const mobileAuthNav     = document.getElementById('mobile-auth-nav');
+
+  if (Auth.isLoggedIn()) {
+    if (mobileOrdersLink)  mobileOrdersLink.style.display  = 'block';
+    if (mobileAccountLink) mobileAccountLink.style.display = 'block';
+    const user = Auth.getUser();
+    if (mobileAuthNav) {
+      mobileAuthNav.innerHTML =
+        '<button onclick="Auth.logout()" style="color:rgba(255,100,100,.8)">登出</button>';
+    }
+  } else {
+    if (mobileAuthNav) {
+      mobileAuthNav.innerHTML = '<a href="/login">登入</a>';
+    }
+  }
+});
+</script>

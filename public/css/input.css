@@ -249,3 +249,228 @@ textarea:focus-visible {
   outline: 2px solid #FF4FB6;
   outline-offset: 2px;
 }
+
+/* ═══════════════════════════════════════════
+   響應式設計 — Responsive Design
+   Breakpoints: md=768px, lg=1024px
+   ═══════════════════════════════════════════ */
+
+/* ─── 手機 Nav 漢堡選單 ─── */
+#mobile-menu-btn { display: none; }
+#mobile-nav      { display: none; }
+
+/* ─── 語義 Layout Class（響應式精確控制）─── */
+.page-two-col  { display: flex; }
+.page-main-col { flex: 1; min-width: 0; }
+
+@media (max-width: 767px) {
+  .page-two-col  { flex-direction: column !important; }
+  .page-main-col { padding-left: 20px !important; padding-right: 20px !important; padding-top: 28px !important; }
+  .page-side-col {
+    width: 100% !important;
+    flex-shrink: unset !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: 1px solid #E5E7EB !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  /* Container padding */
+  .site-container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .page-band {
+    padding: 24px 20px 16px !important;
+  }
+
+  /* ── Nav ── */
+  #site-header > div {
+    padding: 0 20px !important;
+  }
+  #site-header nav { display: none !important; }
+  #auth-nav        { display: none !important; }
+  #mobile-menu-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255,255,255,.7);
+    padding: 4px;
+  }
+  #mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: #1A1A1A;
+    padding: 16px 20px;
+    gap: 0;
+    border-top: 1px solid rgba(255,255,255,.08);
+  }
+  #mobile-nav.open { display: flex !important; }
+  #mobile-nav a, #mobile-nav button, #mobile-nav span {
+    display: block;
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    color: rgba(255,255,255,.75);
+    text-decoration: none;
+    letter-spacing: .1em;
+    background: none;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+  }
+  #mobile-nav a:last-child, #mobile-nav button:last-child { border-bottom: none; }
+
+  /* ── 首頁 Hero ── */
+  .hero-content-wrap {
+    padding: 0 24px !important;
+  }
+
+  /* ── 全站二欄 layout → 堆疊 ── */
+  [style*="display:flex"][style*="min-height"] {
+    flex-direction: column !important;
+  }
+
+  /* ── 商品詳情：左圖欄 ── */
+  [style*="width:520px"] {
+    width: 100% !important;
+  }
+  [style*="gap:80px"] {
+    gap: 32px !important;
+    padding-top: 32px !important;
+    padding-bottom: 40px !important;
+    flex-direction: column !important;
+  }
+
+  /* ── 購物車：摘要欄 ── */
+  [style*="width:380px"][style*="flex-shrink:0"],
+  [style*="width:420px"][style*="flex-shrink:0"] {
+    width: 100% !important;
+    border-left: none !important;
+    border-top: 1px solid #E5E7EB !important;
+  }
+
+  /* ── 訂單詳情：右欄 ── */
+  [style*="width:340px"][style*="flex-shrink:0"] {
+    width: 100% !important;
+    border-left: none !important;
+    border-top: 1px solid #E5E7EB !important;
+  }
+
+  /* ── 側欄（我的訂單等）── */
+  [style*="width:260px"][style*="flex-shrink:0"],
+  [style*="width:240px"][style*="flex-shrink:0"] {
+    width: 100% !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    border-right: none !important;
+    border-bottom: 1px solid #E5E7EB !important;
+    padding: 0 !important;
+    flex-shrink: unset !important;
+  }
+  [style*="width:260px"][style*="flex-shrink:0"] > *,
+  [style*="width:240px"][style*="flex-shrink:0"] > * {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  /* ── Hero 字體縮小 ── */
+  [style*="font-size:clamp"],
+  [style*="font-size:80px"],
+  [style*="font-size:72px"] {
+    font-size: 48px !important;
+    line-height: 1 !important;
+  }
+  [style*="font-size:48px"] {
+    font-size: 36px !important;
+  }
+  [style*="font-size:44px"] {
+    font-size: 32px !important;
+  }
+
+  /* ── 首頁 padding 縮減 ── */
+  [style*="padding:80px"] {
+    padding: 40px 20px !important;
+  }
+  [style*="padding-left:80px"],
+  [style*="padding-right:80px"] {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  [style*="padding:60px 80px"] {
+    padding: 40px 20px !important;
+  }
+
+  /* ── Grid：商品卡片 ── */
+  [style*="grid-template-columns:repeat(4"],
+  [style*="grid-template-columns:repeat(3"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  [style*="grid-template-columns:repeat(2"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Footer ── */
+  [style*="height:280px"][style*="padding:60px 80px"] {
+    height: auto !important;
+    flex-direction: column !important;
+    gap: 32px !important;
+    padding: 40px 20px !important;
+  }
+  [style*="width:320px"][style*="layout"] {
+    width: 100% !important;
+  }
+
+  /* ── 結帳步驟列 ── */
+  #site-header + * .font-ui[style*="01"],
+  header + * [style*="gap:8px"] {
+    gap: 4px !important;
+    font-size: 10px !important;
+  }
+
+  /* ── 登入卡片 ── */
+  [style*="width:440px"][style*="background:#fff"] {
+    width: calc(100% - 32px) !important;
+    left: 16px !important;
+    transform: none !important;
+  }
+
+  /* ── 購物車 grid header ── */
+  [style*="grid-template-columns:1fr 160px 140px 100px"] {
+    grid-template-columns: 1fr 100px 80px 60px !important;
+    font-size: 10px !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Tablet */
+  .site-container {
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+  }
+  [style*="padding:80px"] {
+    padding: 60px 40px !important;
+  }
+  [style*="padding-left:80px"] {
+    padding-left: 40px !important;
+  }
+  [style*="padding-right:80px"] {
+    padding-right: 40px !important;
+  }
+  [style*="width:520px"] {
+    width: 360px !important;
+  }
+  [style*="gap:80px"] {
+    gap: 40px !important;
+  }
+}

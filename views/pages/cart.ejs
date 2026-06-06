@@ -18,10 +18,10 @@
   </div>
 
   <template v-else>
-    <div style="display:flex; min-height:calc(100vh - 280px);">
+    <div class="page-two-col" style="display:flex; min-height:calc(100vh - 280px);">
 
       <!-- Items column -->
-      <div style="flex:1; padding:40px 80px; border-right:1px solid #E5E7EB;">
+      <div class="page-main-col" style="flex:1; padding:40px 80px; border-right:1px solid #E5E7EB;">
 
         <!-- Free-shipping banner -->
         <div v-if="total < 500"
@@ -84,7 +84,7 @@
       </div>
 
       <!-- Summary sidebar -->
-      <div style="width:380px; flex-shrink:0; padding:40px 48px; background:#F9F9F9; border-left:1px solid #E5E7EB;">
+      <div class="page-side-col" style="width:380px; flex-shrink:0; padding:40px 48px; background:#F9F9F9; border-left:1px solid #E5E7EB;">
         <span class="eyebrow" style="margin-bottom:12px;">ORDER SUMMARY</span>
         <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #E5E7EB; margin-bottom:4px;">
           <h2 class="font-display" style="font-size:22px; font-weight:700; color:#1A1A1A;">訂單摘要</h2>
