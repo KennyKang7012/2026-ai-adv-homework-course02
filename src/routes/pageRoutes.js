@@ -37,11 +37,19 @@ router.get('/cart', function (req, res) {
 });
 
 router.get('/checkout', function (req, res) {
-  renderFront(res, 'checkout', { title: '結帳', pageScript: 'checkout' });
+  renderFront(res, 'checkout', { title: '結帳', pageScript: 'checkout', noHeader: true, noFooter: true });
 });
 
 router.get('/login', function (req, res) {
-  renderFront(res, 'login', { title: '登入', pageScript: 'login' });
+  renderFront(res, 'login', { title: '登入', pageScript: 'login', noHeader: true, noFooter: true });
+});
+
+router.get('/account', function (req, res) {
+  renderFront(res, 'account', { title: '帳戶設定', pageScript: 'account' });
+});
+
+router.get('/address', function (req, res) {
+  renderFront(res, 'address', { title: '收件地址', pageScript: 'address' });
 });
 
 router.get('/orders', function (req, res) {

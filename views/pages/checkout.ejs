@@ -1,22 +1,24 @@
 <div id="app">
 
-  <!-- Nav step indicator overlay in page header -->
-  <div style="background:#1A1A1A; padding:0 80px;">
-    <div style="max-width:1280px; margin:0 auto; display:flex; justify-content:center; align-items:center; gap:10px; padding:16px 0; border-bottom:1px solid rgba(255,255,255,.08);">
-      <div v-for="(step, i) in [{n:'01',l:'購物車'},{n:'02',l:'填寫資料'},{n:'03',l:'確認訂單'}]" :key="i"
-           style="display:flex; align-items:center; gap:8px;">
-        <div :style="i === 1
-               ? 'background:#FF4FB6; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center;'
-               : 'background:#333; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center;'">
-          <span class="font-ui" style="font-size:10px; color:#fff; letter-spacing:.05em;">{{ step.n }}</span>
-        </div>
-        <span class="font-ui" :style="i === 1 ? 'font-size:12px; color:#FF4FB6; letter-spacing:.08em;' : 'font-size:12px; color:rgba(255,255,255,.4); letter-spacing:.08em;'">
-          {{ step.l }}
-        </span>
-        <span v-if="i < 2" class="font-ui" style="font-size:12px; color:rgba(255,255,255,.25); margin-left:2px;">→</span>
+  <!-- 結帳專用 Nav：品牌 + 步驟列 -->
+  <header style="background:#1A1A1A; border-bottom:1px solid rgba(255,255,255,0.06);">
+    <div style="max-width:1440px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:72px; padding:0 48px;">
+      <a href="/" class="font-display" style="font-size:21px; font-weight:700; font-style:italic; color:#fff; text-decoration:none; letter-spacing:0.02em;">
+        花漾生活
+      </a>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <% [['01','購物車'],['02','填寫資料'],['03','確認訂單']].forEach(function(s,i){ %>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div style="<%= i===1 ? 'background:#FF4FB6' : 'background:#333' %>; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center;">
+              <span class="font-ui" style="font-size:10px; color:#fff; letter-spacing:.05em;"><%= s[0] %></span>
+            </div>
+            <span class="font-ui" style="font-size:12px; letter-spacing:.08em; <%= i===1 ? 'color:#FF4FB6;' : 'color:rgba(255,255,255,.4);' %>"><%= s[1] %></span>
+          </div>
+          <% if(i<2){ %><span class="font-ui" style="font-size:12px; color:rgba(255,255,255,.25);">→</span><% } %>
+        <% }) %>
       </div>
     </div>
-  </div>
+  </header>
 
   <!-- Page heading -->
   <div style="border-bottom:1px solid #E5E7EB; padding:36px 80px 24px;">

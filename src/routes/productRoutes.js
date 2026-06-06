@@ -153,4 +153,11 @@ router.get('/:id', (req, res) => {
   });
 });
 
+router.get('/:id/related', (req, res) => {
+  const related = db.prepare(
+    'SELECT id, name, price, image_url FROM products WHERE id != ? ORDER BY RANDOM() LIMIT 3'
+  ).all(req.params.id);
+  res.json({ data: related, error: null, message: '成功' });
+});
+
 module.exports = router;

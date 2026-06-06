@@ -1,0 +1,93 @@
+<div id="app">
+
+  <div style="border-bottom:1px solid #E5E7EB; padding:40px 80px 28px;">
+    <span class="eyebrow" style="margin-bottom:12px;">ACCOUNT</span>
+    <h1 class="font-display" style="font-size:44px; font-weight:700; color:#1A1A1A; line-height:1;">收件地址</h1>
+  </div>
+
+  <div style="display:flex; min-height:calc(100vh - 280px);">
+
+    <!-- Sidebar -->
+    <div style="width:260px; flex-shrink:0; background:#F9F9F9; border-right:1px solid #E5E7EB; display:flex; flex-direction:column;">
+      <div style="display:flex; align-items:center; gap:16px; padding:32px 24px;">
+        <div style="width:48px; height:48px; border-radius:50%; background:#FF4FB6; flex-shrink:0; display:flex; align-items:center; justify-content:center;">
+          <span class="font-display" style="font-size:18px; font-weight:700; color:#fff;">{{ userInitial }}</span>
+        </div>
+        <div>
+          <p class="font-display" style="font-size:15px; font-weight:700; color:#1A1A1A;">{{ userName }}</p>
+          <p class="font-ui" style="font-size:11px; color:#9CA3AF; letter-spacing:.04em;">{{ userEmail }}</p>
+        </div>
+      </div>
+      <a href="/orders" style="display:flex; align-items:center; gap:12px; padding:14px 24px; text-decoration:none; border-left:3px solid transparent; background:#F9F9F9;" class="font-ui" onmouseover="this.style.background='#fff'" onmouseout="this.style.background='#F9F9F9'">
+        <span style="font-size:13px; color:#4B5563; letter-spacing:.08em;">我的訂單</span>
+      </a>
+      <a href="/account" style="display:flex; align-items:center; gap:12px; padding:14px 24px; text-decoration:none; border-left:3px solid transparent; background:#F9F9F9;" class="font-ui" onmouseover="this.style.background='#fff'" onmouseout="this.style.background='#F9F9F9'">
+        <span style="font-size:13px; color:#4B5563; letter-spacing:.08em;">帳戶設定</span>
+      </a>
+      <a href="/address" style="display:flex; align-items:center; gap:12px; padding:14px 24px; text-decoration:none; border-left:3px solid #FF4FB6; background:#fff;" class="font-ui">
+        <span style="font-size:13px; font-weight:700; color:#FF4FB6; letter-spacing:.08em;">收件地址</span>
+      </a>
+      <div style="height:1px; background:#E5E7EB; margin:8px 24px;"></div>
+      <button onclick="Auth.logout()" class="font-ui" style="width:100%; text-align:left; padding:14px 24px; background:none; border:none; cursor:pointer; font-size:13px; color:#9CA3AF; letter-spacing:.08em;" onmouseover="this.style.color='#EF4444'" onmouseout="this.style.color='#9CA3AF'">登出</button>
+    </div>
+
+    <!-- Main -->
+    <div style="flex:1; padding:40px 48px; display:flex; flex-direction:column; gap:24px;">
+
+      <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:20px; border-bottom:1px solid #E5E7EB;">
+        <h2 class="font-display" style="font-size:22px; font-weight:700; color:#1A1A1A;">收件地址管理</h2>
+        <button @click="showForm = !showForm" class="btn-accent" style="font-size:12px; padding:10px 20px;">
+          + 新增地址
+        </button>
+      </div>
+
+      <!-- Add form -->
+      <div v-if="showForm" style="border:1px solid #FF4FB6; border-radius:4px; padding:24px; display:flex; flex-direction:column; gap:16px;">
+        <h3 class="font-display" style="font-size:16px; font-weight:700; color:#1A1A1A; margin-bottom:4px;">新增收件地址</h3>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div>
+            <label class="form-label">收件人姓名</label>
+            <input v-model="newAddr.name" type="text" placeholder="請輸入收件人姓名" class="form-input">
+          </div>
+          <div>
+            <label class="form-label">聯絡電話</label>
+            <input v-model="newAddr.phone" type="text" placeholder="請輸入聯絡電話" class="form-input">
+          </div>
+        </div>
+        <div>
+          <label class="form-label">收件地址</label>
+          <input v-model="newAddr.address" type="text" placeholder="請輸入完整地址" class="form-input">
+        </div>
+        <div style="display:flex; gap:12px;">
+          <button @click="addAddress" class="btn-accent" style="font-size:12px; padding:10px 24px;">儲存</button>
+          <button @click="showForm = false" class="btn-outline" style="font-size:12px; padding:10px 24px;">取消</button>
+        </div>
+      </div>
+
+      <!-- Address list -->
+      <div v-if="addresses.length === 0 && !showForm" style="text-align:center; padding:60px 0;">
+        <p style="font-size:32px; margin-bottom:12px;">📮</p>
+        <p class="font-body" style="font-size:14px; color:#4B5563; margin-bottom:4px;">尚無收件地址</p>
+        <p class="font-ui" style="font-size:12px; color:#9CA3AF;">點選「新增地址」加入常用收件地址</p>
+      </div>
+
+      <div v-for="(addr, i) in addresses" :key="i"
+           style="border-radius:4px; padding:20px 24px; display:flex; flex-direction:column; gap:8px;"
+           :style="addr.isDefault ? 'border:1px solid #FF4FB6;' : 'border:1px solid #E5E7EB;'">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <span class="font-display" style="font-size:15px; font-weight:700; color:#1A1A1A;">{{ addr.name }}</span>
+            <span v-if="addr.isDefault" style="background:#FFF0F8; color:#FF4FB6; font-size:11px; font-weight:700; padding:3px 10px; border-radius:12px; font-family:var(--font-ui); letter-spacing:.04em;">預設</span>
+          </div>
+          <div style="display:flex; gap:16px;">
+            <button @click="removeAddress(i)" class="font-ui" style="font-size:12px; color:#EF4444; background:none; border:none; cursor:pointer; letter-spacing:.04em;">刪除</button>
+          </div>
+        </div>
+        <p class="font-body" style="font-size:13px; color:#4B5563;">{{ addr.phone }}</p>
+        <p class="font-body" style="font-size:13px; color:#4B5563;">{{ addr.address }}</p>
+      </div>
+
+    </div>
+  </div>
+
+</div>

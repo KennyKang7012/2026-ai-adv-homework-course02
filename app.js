@@ -48,7 +48,7 @@ app.use(function (req, res) {
   }
   res.status(404).render('pages/404', {}, function (err, body) {
     if (err) return res.status(500).send(err.message);
-    res.render('layouts/front', { body, title: '找不到頁面', pageScript: '' });
+    res.render('layouts/front', { body, title: '找不到頁面', pageScript: '', noHeader: true, noFooter: true });
   });
 });
 

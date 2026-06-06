@@ -27,14 +27,24 @@
     <!-- Main content -->
     <div class="site-container" style="display:flex; gap:80px; padding-top:56px; padding-bottom:80px;">
 
-      <!-- Left: Image -->
+      <!-- Left: Image + Thumbnails -->
       <div style="width:520px; flex-shrink:0;">
         <div style="position:relative; overflow:hidden;">
-          <img :src="product.image_url || 'https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=600'"
+          <img :src="activeImage || product.image_url || 'https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=600'"
                :alt="product.name"
                style="width:100%; aspect-ratio:1; object-fit:cover; display:block;">
           <div style="position:absolute; top:20px; left:20px; background:#1A1A1A; padding:5px 14px; border-radius:4px;">
             <span class="font-ui" style="font-size:10px; color:#FF4FB6; letter-spacing:.2em; text-transform:uppercase;">LIMITED</span>
+          </div>
+        </div>
+        <!-- Thumbnail row -->
+        <div style="display:flex; gap:12px; margin-top:12px;">
+          <div v-for="(img, i) in thumbImages" :key="i"
+               @click="activeImage = img"
+               style="width:72px; height:60px; border-radius:2px; overflow:hidden; cursor:pointer; flex-shrink:0;"
+               :style="activeImage === img ? 'outline:1px solid #FF4FB6;' : 'outline:1px solid #E5E7EB;'">
+            <img :src="img" :alt="product.name + ' ' + (i+1)"
+                 style="width:100%; height:100%; object-fit:cover; display:block;">
           </div>
         </div>
       </div>
@@ -84,6 +94,27 @@
             <p class="font-body" style="font-size:13px; color:#4B5563;">— 消費滿 NT$ 500 享免運優惠</p>
           </div>
         </div>
+      </div>
+    </div>
+    <!-- Related products -->
+    <div v-if="relatedProducts.length > 0" style="background:#F9F9F9; padding:60px 80px;">
+      <h2 class="font-display" style="font-size:28px; font-weight:700; color:#1A1A1A; margin-bottom:32px;">您可能也會喜歡</h2>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+        <a v-for="p in relatedProducts" :key="p.id"
+           :href="'/products/' + p.id"
+           style="text-decoration:none; border:1px solid #E5E7EB; overflow:hidden; background:#fff; display:flex; flex-direction:column; transition:box-shadow .2s;"
+           onmouseover="this.style.boxShadow='0 4px 20px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="height:200px; overflow:hidden;">
+            <img :src="p.image_url || 'https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=400'"
+                 :alt="p.name" style="width:100%; height:100%; object-fit:cover; display:block;">
+          </div>
+          <div style="padding:14px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <p class="font-display" style="font-size:14px; font-weight:700; color:#1A1A1A; margin-bottom:4px;">{{ p.name }}</p>
+              <p class="font-body" style="font-size:13px; font-style:italic; color:#FF4FB6;">NT$ {{ p.price.toLocaleString() }}</p>
+            </div>
+          </div>
+        </a>
       </div>
     </div>
   </div>

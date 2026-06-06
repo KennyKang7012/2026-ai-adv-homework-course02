@@ -1,4 +1,4 @@
-const { createApp, ref, onMounted } = Vue;
+const { createApp, ref, computed, onMounted } = Vue;
 
 createApp({
   setup() {
@@ -8,6 +8,13 @@ createApp({
     const notFound = ref(false);
     const quantity = ref(1);
     const adding = ref(false);
+    const activeImage = ref(null);
+    const relatedProducts = ref([]);
+
+    const thumbImages = computed(function () {
+      if (!product.value || !product.value.image_url) return [];
+      return [product.value.image_url, product.value.image_url, product.value.image_url, product.value.image_url];
+    });
 
     function decrease() {
       if (quantity.value > 1) quantity.value--;
@@ -43,13 +50,19 @@ createApp({
       try {
         const res = await apiFetch('/api/products/' + productId);
         product.value = res.data;
+        activeImage.value = res.data.image_url;
       } catch (e) {
         notFound.value = true;
-      } finally {
         loading.value = false;
+        return;
       }
+      loading.value = false;
+      try {
+        const rel = await apiFetch('/api/products/' + productId + '/related');
+        relatedProducts.value = rel.data || [];
+      } catch (e) {}
     });
 
-    return { product, loading, notFound, quantity, adding, decrease, increase, addToCart };
+    return { product, loading, notFound, quantity, adding, activeImage, thumbImages, relatedProducts, decrease, increase, addToCart };
   }
 }).mount('#app');
