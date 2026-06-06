@@ -39,3 +39,6 @@ coverage/
 .claude/*.local.json
 public/css/output.css
 qa.md
+
+# Playwright MCP 暫存快照
+.playwright-mcp/
