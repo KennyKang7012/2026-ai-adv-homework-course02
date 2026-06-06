@@ -213,10 +213,10 @@
 
 ---
 
-### 階段 11：最終 E2E 驗收
+### 階段 11：E2E 驗收（首次執行）— 2026-06-06
 **使用 Skill**：`e2e-payment-test`（12 項）
 
-**結果：12 / 12 全部通過 ✅**
+**結果：11 / 12，E4 失敗 ❌**
 
 | 步驟 | 說明 | 結果 |
 |------|------|------|
@@ -231,7 +231,45 @@
 | E1 | 空購物車 → 跳轉 /cart | ✅ |
 | E2 | 未登入 → 跳轉 /login?redirect=%2Forders | ✅ |
 | E3 | 空白欄位送出 → 三欄錯誤提示 | ✅ |
-| E4 | 404 頁面：無標準 Nav、內容正確、回到首頁可用 | ✅ |
+| E4 | 404 頁面：**無簡化品牌 Nav（header / nav 元素均不存在）** | ❌ |
+
+**E4 失敗細項**：
+- 頁面標題含「找不到頁面」✅
+- PAGE NOT FOUND eyebrow / 404 大字 / 找不到頁面標題 ✅
+- 底部品牌文字 ✅
+- 「← 回到首頁」在品牌 Nav 內 ❌（無 `<header>` 元素，只有內容區按鈕且無 ← 前綴）
+
+---
+
+### 階段 12：修正 404 Nav 並重新驗收 — 2026-06-06
+
+**問題根因**：`app.js` 404 handler 以 `noHeader: true, noFooter: true` 渲染，使頁面無任何 header。`CHANGELOG.md` 與 `DESIGN_GAP.md` 均記錄「已完成」，但 `views/pages/404.ejs` 從未加入 header 元素，屬於遺漏。
+
+**修正**：在 `views/pages/404.ejs` 頂部補入簡化 header，與 `checkout.ejs` 同一模式：
+
+```html
+<header style="background:#1A1A1A; border-bottom:1px solid rgba(255,255,255,0.06);">
+  <div style="...height:72px; padding:0 48px;">
+    <a href="/" class="font-display" style="...">花漾生活</a>
+    <a href="/" class="font-ui" style="...">← 回到首頁</a>
+  </div>
+</header>
+```
+
+**同步文件更新**：
+- `docs/CHANGELOG.md`：新增 `[1.2.1]` patch 版本
+- `docs/DESIGN_GAP.md`：07 404 Footer 列 ⚠️ → ✅；設計差異說明排除 404
+- `docs/PROJECT_JOURNEY.md`：本次更新
+
+**重新驗收結果：12 / 12 全部通過 ✅**
+
+| 步驟 | 說明 | 結果 |
+|------|------|------|
+| Step 1–8 | 正常金流流程 | ✅ × 8 |
+| E1 | 空購物車 → 跳轉 /cart | ✅ |
+| E2 | 未登入 → 跳轉 /login?redirect=%2Forders | ✅ |
+| E3 | 空白欄位送出 → 三欄錯誤提示 | ✅ |
+| E4 | 404 頁面：簡化 Nav（花漾生活 + ← 回到首頁）、內容正確、回到首頁跳轉正常 | ✅ |
 
 ---
 
@@ -252,6 +290,12 @@
 ### 問題 4：DESIGN_GAP.md blockquote 無換行
 **原因**：Markdown 中連續兩行 `>` 會合併成同一段落，不會換行。
 **修正**：在兩行 blockquote 之間插入空白 `>` 行，強制段落分隔。
+
+### 問題 6：404 頁面 Nav 文件記錄完成但未實作
+**原因**：v1.2.0 CHANGELOG 與 DESIGN_GAP.md 均記載「404 專用 Nav 已完成」，但 `views/pages/404.ejs` 從未加入 header 元素。`app.js` 雖已傳入 `noHeader: true` 正確跳過標準 Nav，卻忘記在 404 頁面內部補上自訂簡化 Nav。
+**發現**：E2E Skill 執行 E4 測試時，`browser_evaluate` 確認 `document.querySelector('header')` 回傳 null，遂判定失敗。
+**修正**：在 `views/pages/404.ejs` 頂部補入與 `checkout.ejs` / `login.ejs` 相同模式的簡化 header（品牌連結 + ← 回到首頁連結）。
+**教訓**：文件記錄的「完成」需以可驗證的自動化測試為準，不能僅憑人工確認。
 
 ### 問題 5：design.pen 桌面版與磁碟不同步
 **原因**：Pencil MCP 直接寫入磁碟，但桌面版 Pencil App 有未儲存的本地修改，可能導致衝突。
@@ -315,6 +359,9 @@
 | `9b7f975` | 補齊 .env.example：新增 PORT 與 NODE_ENV 說明 |
 | `e110c9e` | E2E Skill 新增 E4：404 頁面功能驗證（11→12 項） |
 | `df647ce` | 更新全套文件至 v1.2.0 最終狀態（CHANGELOG / ARCHITECTURE / DEVELOPMENT / TESTING / FEATURES） |
+| — | E2E 測試執行（11/12，E4 404 Nav 缺漏） |
+| — | 修正 `views/pages/404.ejs`：補入簡化品牌 Nav（v1.2.1） |
+| — | 同步更新 CHANGELOG / DESIGN_GAP / PROJECT_JOURNEY 文件 |
 
 ---
 

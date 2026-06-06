@@ -2,6 +2,15 @@
 
 所有重大變更皆記錄於此文件。格式參考 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [1.2.1] - 2026-06-06
+
+### Fixed
+- **404 頁面**：補實作遺漏的設計稿專用 Nav（品牌「花漾生活」+ 「← 回到首頁」），原 v1.2.0 CHANGELOG 已記載完成但實際未加入 header 元素；現補齊 `views/pages/404.ejs` 頂部 header，與 `checkout.ejs` / `login.ejs` 同一模式
+- **DESIGN_GAP.md**：修正 07 404 頁面 Footer 列錯誤標記（`noFooter: true` 使 404 頁實際無 Footer，符合設計稿，應為 ✅ 而非 ⚠️）
+- **E2E 測試**：E4「404 頁面」全 4 項驗證現通過，整體 12/12 ✅
+
+---
+
 ## [1.2.0] - 2026-06-06
 
 ### 新增
