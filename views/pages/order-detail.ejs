@@ -67,9 +67,15 @@
             </p>
           </div>
 
-          <!-- Totals row -->
-          <div style="display:flex; align-items:center; justify-content:flex-end; gap:32px; padding:18px 24px;">
-            <span class="font-body" style="font-size:13px; color:#4B5563;">總計</span>
+          <!-- Subtotal + Total row -->
+          <div style="display:flex; align-items:center; justify-content:flex-end; gap:32px; padding:14px 24px; border-top:1px solid #E5E7EB;">
+            <span class="font-body" style="font-size:13px; color:#4B5563;">商品小計</span>
+            <span class="font-body" style="font-size:14px; color:#4B5563;">
+              NT$ {{ order.items.reduce((s,i)=>s+i.product_price*i.quantity,0).toLocaleString() }}
+            </span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:flex-end; gap:32px; padding:14px 24px; border-top:1px solid #E5E7EB;">
+            <span class="font-ui" style="font-size:12px; font-weight:700; color:#1A1A1A; letter-spacing:.12em;">總計</span>
             <span class="font-display" style="font-size:22px; font-weight:700; color:#FF4FB6;">
               NT$ {{ order.total_amount.toLocaleString() }}
             </span>
@@ -96,7 +102,7 @@
           <div style="padding:14px 18px; border-bottom:1px solid #E5E7EB;">
             <h3 class="font-display" style="font-size:15px; font-weight:700; color:#1A1A1A;">訂單資訊</h3>
           </div>
-          <div v-for="row in [{l:'訂單編號',v:order.order_no},{l:'建立日期',v:new Date(order.created_at).toLocaleDateString('zh-TW')},{l:'訂單狀態',v:statusMap[order.status]?.label||order.status}]" :key="row.l"
+          <div v-for="row in [{l:'訂單編號',v:order.order_no},{l:'建立日期',v:new Date(order.created_at).toLocaleDateString('zh-TW')},{l:'付款方式',v:order.payment_method||'—'},{l:'訂單狀態',v:statusMap[order.status]?.label||order.status}]" :key="row.l"
                style="display:flex; justify-content:space-between; align-items:center; padding:11px 18px; border-bottom:1px solid #E5E7EB;">
             <span class="font-ui" style="font-size:11px; color:#9CA3AF; letter-spacing:.08em; text-transform:uppercase;">{{ row.l }}</span>
             <span class="font-body" style="font-size:13px; color:#1A1A1A;">{{ row.v }}</span>

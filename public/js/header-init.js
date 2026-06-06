@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (Auth.isAdmin()) {
         html += '<a href="/admin/products" class="font-ui" style="' + navLinkStyle + ' color:#FF4FB6;">後台管理</a>';
       }
-      html += '<span class="font-ui" style="' + navLinkStyle + '">' + (user?.name || '') + '</span>';
+      html += '<span class="font-ui" style="' + navLinkStyle + ' color:#FF4FB6;">' + (user?.name || '') + ' ▾</span>';
       html += '<button onclick="Auth.logout()" class="font-ui" style="' + navLinkStyle + ' background:none; border:none; cursor:pointer;" onmouseover="this.style.color=\'#FF4FB6\'" onmouseout="this.style.color=\'rgba(255,255,255,.65)\'">登出</button>';
       authNav.innerHTML = html;
     } else {

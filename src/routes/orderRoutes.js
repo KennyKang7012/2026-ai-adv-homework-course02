@@ -8,6 +8,18 @@ const router = express.Router();
 
 router.use(authMiddleware);
 
+function resolvePaymentMethod(paymentType) {
+  if (!paymentType) return null;
+  const type = paymentType.toLowerCase();
+  if (type.startsWith('webatm')) return '網路 ATM';
+  if (type.startsWith('atm')) return 'ATM 虛擬帳號';
+  if (type.startsWith('credit')) return '信用卡';
+  if (type.startsWith('cvs')) return '超商代碼';
+  if (type.startsWith('barcode')) return '超商條碼';
+  if (type.startsWith('applepay')) return 'Apple Pay';
+  return paymentType;
+}
+
 function generateOrderNo() {
   const now = new Date();
   const dateStr = now.toISOString().slice(0, 10).replace(/-/g, '');
@@ -224,8 +236,16 @@ router.get('/', (req, res) => {
     'SELECT id, order_no, total_amount, status, created_at FROM orders WHERE user_id = ? ORDER BY created_at DESC'
   ).all(req.user.userId);
 
+  const getItems = db.prepare(
+    'SELECT product_name, quantity FROM order_items WHERE order_id = ?'
+  );
+  const ordersWithItems = orders.map(o => ({
+    ...o,
+    items_summary: getItems.all(o.id).map(i => `${i.product_name} ×${i.quantity}`).join('、')
+  }));
+
   res.json({
-    data: { orders },
+    data: { orders: ordersWithItems },
     error: null,
     message: '成功'
   });
@@ -464,7 +484,8 @@ router.post('/:id/check-payment', async (req, res) => {
     const result = await queryTradeInfo(order.merchant_trade_no);
 
     if (result.TradeStatus === '1') {
-      db.prepare('UPDATE orders SET status = ? WHERE id = ?').run('paid', order.id);
+      const paymentMethod = resolvePaymentMethod(result.PaymentType || '');
+      db.prepare('UPDATE orders SET status = ?, payment_method = ? WHERE id = ?').run('paid', paymentMethod, order.id);
       const updated = db.prepare('SELECT * FROM orders WHERE id = ?').get(order.id);
       const items = db.prepare('SELECT product_name, product_price, quantity FROM order_items WHERE order_id = ?').all(order.id);
       return res.json({

@@ -71,9 +71,12 @@ function initializeDatabase() {
   // Migration: add merchant_trade_no column for ECPay integration
   try {
     db.exec(`ALTER TABLE orders ADD COLUMN merchant_trade_no TEXT`);
-  } catch (e) {
-    // Column already exists, ignore
-  }
+  } catch (e) {}
+
+  // Migration: add payment_method column for displaying payment info
+  try {
+    db.exec(`ALTER TABLE orders ADD COLUMN payment_method TEXT`);
+  } catch (e) {}
 
   // Seed data
   seedAdminUser();
