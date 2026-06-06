@@ -11,7 +11,7 @@
 | 綠界金流串接 | ✅ 完成 | ECPay AIO 付款、QueryTradeInfo 查詢驗證 |
 | 後台商品管理 | ✅ 完成 | 商品 CRUD |
 | 後台訂單管理 | ✅ 完成 | 訂單查詢與狀態篩選 |
-| 前台頁面 | ✅ 完成 | EJS + Tailwind CSS |
+| 前台頁面 | ✅ 完成 | EJS + Tailwind CSS + 響應式設計（768px 斷點） |
 | 後台頁面 | ✅ 完成 | EJS + Tailwind CSS |
 | 測試 | ✅ 完成 | Vitest + supertest，6 個測試檔案 |
 | API 文件 | ✅ 完成 | Swagger/OpenAPI 生成 |

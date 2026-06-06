@@ -118,7 +118,7 @@
 
 **觸發關鍵字**：「跑 E2E 測試」、「測試金流」、「執行自動化測試」
 
-**涵蓋 11 個測試案例**：
+**涵蓋 12 個測試案例**：
 
 **正常流程（8 步）**：
 1. 登入（admin@hexschool.com / 12345678）
@@ -130,10 +130,11 @@
 7. 返回商店確認付款成功
 8. 訂單列表驗證
 
-**異常情境（3 項）**：
+**異常情境（4 項）**：
 - E1：空購物車訪問 `/checkout` → 跳轉 `/cart`
 - E2：未登入訪問 `/orders` → 跳轉 `/login?redirect=%2Forders`
 - E3：空白送出結帳表單 → 三欄各顯示錯誤訊息
+- E4：404 頁面 → 無標準 Nav、PAGE NOT FOUND 內容正確、「回到首頁」可用
 
 ---
 
@@ -185,14 +186,41 @@
 
 ---
 
-### 階段 9：E2E 最終驗證
-**使用 Skill**：`e2e-payment-test`
+### 階段 9：響應式設計實作
+**Commit** `4af97a6` 新增設計截圖目錄並實作響應式設計
 
-**結果：11 / 11 全部通過 ✅**
+**修正項目**：
+- `public/css/input.css`：新增 Mobile（≤767px）與 Tablet（768-1023px）媒體查詢，語義 class（`.page-two-col` / `.page-main-col` / `.page-side-col`）
+- `views/partials/header.ejs`：加入漢堡選單（☰），手機版展開完整連結
+- `views/pages/cart.ejs`、`checkout.ejs`、`order-detail.ejs`：加入語義 class，手機版自動堆疊
+
+**截圖存檔**（`docs/design/`）：
+- 11 張桌面版截圖（actual-01 ～ actual-10）
+- 4 張手機版響應式截圖（mobile-01 ～ mobile-04）
+- `README.md` 索引（規範、金流流程、響應式對照表）
+
+---
+
+### 階段 10：E2E Skill 新增 E4（404 頁面）
+**Commit** `e110c9e` E2E Skill 新增 E4：404 頁面功能驗證
+
+新增第 12 項測試，驗證：
+- 不存在路由觸發 404 頁面
+- 無標準 Nav（設計稿專用 Nav）
+- PAGE NOT FOUND eyebrow + 404 大字 + 標題文字
+- 底部品牌文字
+- 「回到首頁」按鈕正確導航
+
+---
+
+### 階段 11：最終 E2E 驗收
+**使用 Skill**：`e2e-payment-test`（12 項）
+
+**結果：12 / 12 全部通過 ✅**
 
 | 步驟 | 說明 | 結果 |
 |------|------|------|
-| Step 1 | 登入（登入頁無標準 Nav） | ✅ |
+| Step 1 | 登入（設計稿專用 Nav，無標準 Header） | ✅ |
 | Step 2 | 加入購物車（縮圖列 + 相關商品可見） | ✅ |
 | Step 3 | 購物車 → 結帳（品牌+步驟 Nav） | ✅ |
 | Step 4 | 填寫收件資訊送出 | ✅ |
@@ -203,6 +231,7 @@
 | E1 | 空購物車 → 跳轉 /cart | ✅ |
 | E2 | 未登入 → 跳轉 /login?redirect=%2Forders | ✅ |
 | E3 | 空白欄位送出 → 三欄錯誤提示 | ✅ |
+| E4 | 404 頁面：無標準 Nav、內容正確、回到首頁可用 | ✅ |
 
 ---
 
@@ -281,6 +310,11 @@
 | `9322725` | 完成剩餘 5 項設計稿缺口實作 |
 | `0556d90` | 更新 DESIGN_GAP.md：所有缺口項目已全數完成 |
 | `9e1b1be` | 修正 DESIGN_GAP.md blockquote 換行格式 |
+| `e189f4c` | 新增專案開發歷程知識庫（PROJECT_JOURNEY.md） |
+| `4af97a6` | 新增設計截圖目錄（docs/design/）並實作響應式設計 |
+| `9b7f975` | 補齊 .env.example：新增 PORT 與 NODE_ENV 說明 |
+| `e110c9e` | E2E Skill 新增 E4：404 頁面功能驗證（11→12 項） |
+| `df647ce` | 更新全套文件至 v1.2.0 最終狀態（CHANGELOG / ARCHITECTURE / DEVELOPMENT / TESTING / FEATURES） |
 
 ---
 
@@ -293,5 +327,6 @@
 | 架構說明 | `docs/ARCHITECTURE.md` | 系統架構與目錄結構 |
 | 開發規範 | `docs/DEVELOPMENT.md` | 命名規則與開發流程 |
 | 測試指南 | `docs/TESTING.md` | Vitest 測試規範 |
-| E2E 測試 Skill | `.claude/skills/e2e-payment-test/SKILL.md` | 觸發詞「跑 E2E 測試」，11 項自動化驗證 |
-| 設計稿 | `design.pen` | Pencil MCP 設計檔（共 10 個頁面） |
+| E2E 測試 Skill | `.claude/skills/e2e-payment-test/SKILL.md` | 觸發詞「跑 E2E 測試」，12 項自動化驗證（含 E4 404） |
+| 設計截圖 | `docs/design/` | 11 張桌面 + 4 張手機截圖，含 README.md 索引 |
+| 設計稿 | `design.pen` | Pencil MCP 設計檔（共 10 個頁面），保留根目錄 |

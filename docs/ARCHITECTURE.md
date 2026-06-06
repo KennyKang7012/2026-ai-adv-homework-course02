@@ -43,6 +43,8 @@
 │   │   ├── login.ejs               # 登入頁面
 │   │   ├── orders.ejs              # 我的訂單頁面
 │   │   ├── order-detail.ejs        # 訂單詳情頁面
+│   │   ├── account.ejs             # 帳戶設定頁面
+│   │   ├── address.ejs             # 收件地址管理頁面
 │   │   ├── 404.ejs                 # 404 錯誤頁面
 │   │   └── admin/
 │   │       ├── products.ejs        # 後台商品管理頁面
@@ -74,6 +76,8 @@
 │           ├── login.js            # 登入頁腳本
 │           ├── orders.js           # 訂單列表頁腳本
 │           ├── order-detail.js     # 訂單詳情頁腳本
+│           ├── account.js          # 帳戶設定頁腳本
+│           ├── address.js          # 收件地址管理頁腳本
 │           ├── admin-products.js   # 後台商品管理腳本
 │           └── admin-orders.js     # 後台訂單管理腳本
 │
@@ -134,6 +138,7 @@ server.js
 |------|------|------|------|------|
 | GET | `/api/products` | 無 | 商品列表（分頁） | productRoutes.js |
 | GET | `/api/products/:id` | 無 | 商品詳情 | productRoutes.js |
+| GET | `/api/products/:id/related` | 無 | 相關商品（隨機 3 筆） | productRoutes.js |
 
 ### 購物車（/api/cart）
 
@@ -181,6 +186,8 @@ server.js
 | `/login` | 登入 | pages/login.js |
 | `/orders` | 我的訂單 | pages/orders.js |
 | `/orders/:id` | 訂單詳情 | pages/order-detail.js |
+| `/account` | 帳戶設定 | pages/account.js |
+| `/address` | 收件地址管理 | pages/address.js |
 | `/ecpay/payment/:orderId` | 綠界付款表單（自動送出） | —（直接回傳 HTML） |
 | `/admin/products` | 後台商品管理 | pages/admin-products.js |
 | `/admin/orders` | 後台訂單管理 | pages/admin-orders.js |
@@ -332,6 +339,7 @@ server.js
 | total_amount | INTEGER | NOT NULL | 訂單總金額 |
 | status | TEXT | NOT NULL DEFAULT 'pending', CHECK IN ('pending','paid','failed') | 訂單狀態 |
 | merchant_trade_no | TEXT | 可為 NULL | 綠界交易編號（由 order_no 去除連字號產生，如 `ORD20260412A1B2C`） |
+| payment_method | TEXT | 可為 NULL | 付款方式中文名稱（check-payment 成功後自動填入，如「網路 ATM」） |
 | created_at | TEXT | NOT NULL DEFAULT datetime('now') | 建立時間 |
 
 ### order_items

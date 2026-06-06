@@ -2,7 +2,39 @@
 
 所有重大變更皆記錄於此文件。格式參考 [Keep a Changelog](https://keepachangelog.com/)。
 
-## [Unreleased]
+## [1.2.0] - 2026-06-06
+
+### 新增
+- **設計稿全面重製**：使用 `/frontend-design` Skill 搭配 Pencil MCP 建立 10 個前台頁面設計稿（`design.pen`）
+- **前台頁面全面對齊設計稿**：首頁、商品詳情、購物車、結帳、登入、我的訂單、訂單詳情、404 完全對齊 Pencil 設計稿視覺
+- **新增頁面**：帳戶設定（`/account`）、收件地址管理（`/address`）
+- **商品詳情**：4 張縮圖列（可切換主圖）、「您可能也會喜歡」相關商品區塊（3 張）
+- **新 API**：`GET /api/products/:id/related` — 隨機取 3 筆相關商品
+- **訂單功能補齊**：商品小計行（分離顯示）、付款方式欄位（`payment_method`）、訂單列商品摘要文字（`items_summary`）
+- **響應式設計**：手機版漢堡 Nav（☰）、各頁面雙欄 → 手機單欄堆疊（`page-two-col` / `page-main-col` / `page-side-col` CSS class）
+- **我的訂單側欄**：用戶頭像（首字母）、姓名、Email、帳戶設定、收件地址連結
+- **購物車 / 結帳**：折扣行（-NT$ 0）
+- **E2E 自動化測試 Skill**：`.claude/skills/e2e-payment-test/SKILL.md`，12 項測試（正常流程 8 + 異常情境 4，含 E4 404 頁面）
+- **設計文件**：`docs/design/`（11 張桌面截圖 + 4 張手機截圖 + README.md）
+- **知識庫**：`docs/PROJECT_JOURNEY.md`（9 個開發階段 + 錯誤修正記錄）
+- **缺口報告**：`docs/DESIGN_GAP.md`（設計稿 vs 實作完整比對，全部項目已完成）
+
+### Changed
+- **Nav（登入後）**：顯示用戶真實姓名加粉色 ▾
+- **登入 / 404 頁面**：改用設計稿專用 Nav（品牌 + 回到首頁），移除標準 Header
+- **結帳頁面**：改用設計稿專用 Nav（品牌 + 步驟列），移除標準 Header
+- **結帳表單**：移除 `max-width:600px` 限制，填滿左欄
+- `GET /api/orders`：回應加入 `items_summary`（商品摘要文字）
+- `POST /api/orders/:id/check-payment`：付款成功時自動識別並儲存 `payment_method`
+- `.env.example`：補齊 `PORT` 與 `NODE_ENV` 說明
+
+### Fixed
+- `product-detail.js`：分離商品載入與相關商品的錯誤處理，避免相關商品 API 失敗誤觸發 notFound 狀態
+- DESIGN_GAP.md blockquote 換行格式
+
+---
+
+## [1.1.0] - 2026-05-24（綠界金流整合）
 
 ### Added
 - 綠界 ECPay AIO 金流串接：結帳後導向綠界付款頁面完成真實付款流程
@@ -14,6 +46,8 @@
 ### Changed
 - 結帳頁面（checkout.js）：送出訂單後導向綠界付款頁面，不再直接跳轉訂單詳情
 - 訂單詳情頁面（order-detail.ejs / order-detail.js）：原「付款成功/失敗」模擬按鈕改為「查詢付款狀態」與「前往付款」按鈕；從綠界導回時自動觸發付款狀態查詢
+
+---
 
 ## [1.0.0] - 2026-04-12
 

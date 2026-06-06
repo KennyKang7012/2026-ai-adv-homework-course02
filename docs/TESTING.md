@@ -4,8 +4,47 @@
 
 | 工具 | 用途 |
 |------|------|
-| [Vitest](https://vitest.dev/) | 測試執行器（相容 Jest API） |
+| [Vitest](https://vitest.dev/) | 單元 / 整合測試執行器（相容 Jest API） |
 | [supertest](https://github.com/ladjs/supertest) | HTTP 請求測試（直接對 Express app 發請求，不啟動伺服器） |
+| Playwright MCP + E2E Skill | 端對端金流自動化測試（瀏覽器操作 + 綠界付款模擬） |
+
+## E2E 自動化測試（Playwright MCP Skill）
+
+### 觸發方式
+
+在 Claude Code 對話中輸入：`跑 E2E 測試` / `測試金流` / `run e2e`
+
+### Skill 位置
+
+`.claude/skills/e2e-payment-test/SKILL.md`
+
+### 測試涵蓋（共 12 項）
+
+**正常流程（8 項）**：
+1. 登入（設計稿專用 Nav 驗證）
+2. 加入購物車
+3. 購物車 → 結帳（品牌＋步驟 Nav 驗證）
+4. 填寫收件資訊送出至 ECPay
+5. 選擇網路 ATM / 台灣土地銀行
+6. 土地銀行模擬頁 Save 完成交易
+7. 返回商店確認付款成功、付款方式自動填入
+8. 訂單列表：最新訂單、商品摘要顯示
+
+**異常情境（4 項）**：
+- E1：空購物車 → 自動跳轉 `/cart`
+- E2：未登入 → 跳轉 `/login?redirect=%2Forders`
+- E3：空白送出結帳表單 → 三欄錯誤提示
+- E4：404 頁面：無標準 Nav、內容正確、回到首頁可用
+
+### 測試帳號
+
+| 項目 | 值 |
+|------|----|
+| Email | `admin@hexschool.com` |
+| 密碼 | `12345678` |
+| 收件人 | `kenn123` |
+| Email | `kenny123@123.com` |
+| 地址 | `taiwan` |
 
 ## 執行指令
 

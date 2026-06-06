@@ -151,10 +151,10 @@ CREATE TABLE IF NOT EXISTS your_table (
 | `ADMIN_EMAIL` | 種子管理員信箱 | 選填 | `admin@hexschool.com` |
 | `ADMIN_PASSWORD` | 種子管理員密碼 | 選填 | `12345678` |
 | `NODE_ENV` | 執行環境 | 選填 | 無（影響 bcrypt salt rounds：`test` → 1，其他 → 10） |
-| `ECPAY_MERCHANT_ID` | 綠界商店代號 | 選填（目前未使用） | `3002607` |
-| `ECPAY_HASH_KEY` | 綠界 HashKey | 選填（目前未使用） | — |
-| `ECPAY_HASH_IV` | 綠界 HashIV | 選填（目前未使用） | — |
-| `ECPAY_ENV` | 綠界環境 | 選填（目前未使用） | `staging` |
+| `ECPAY_MERCHANT_ID` | 綠界商店代號 | 選填 | `3002607` |
+| `ECPAY_HASH_KEY` | 綠界 HashKey | 選填 | `pwFHCqoQZGmho4w6` |
+| `ECPAY_HASH_IV` | 綠界 HashIV | 選填 | `EkRm7iFT261dpevs` |
+| `ECPAY_ENV` | 綠界環境（`staging` / `production`） | 選填 | `staging` |
 
 ## JSDoc / OpenAPI 格式說明
 
